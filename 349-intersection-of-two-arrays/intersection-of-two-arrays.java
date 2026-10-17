@@ -13,7 +13,17 @@ class Solution {
         s2.add(num);
     }
 
+
+
+
+    if(s1.size() < s2.size())
+    {
+
+
     int res[] =new int[s1.size()];
+
+    
+
 
     int k=0;
 
@@ -25,6 +35,21 @@ class Solution {
             k=k+1;
         }
     }
-return Arrays.copyOfRange(res,0,k);    
+return Arrays.copyOfRange(res,0,k);   
     }
+
+ else{
+int res[] =new int[s2.size()];
+    int k=0;
+
+    for(int num:s2)
+    {
+        if(s1.contains(num))
+        {
+            res[k]=num;
+            k=k+1;
+        }
+    }
+return Arrays.copyOfRange(res,0,k);    
+    }}
 }
