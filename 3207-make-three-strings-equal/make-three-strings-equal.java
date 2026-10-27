@@ -1,25 +1,22 @@
 class Solution {
     public int findMinimumOperations(String s1, String s2, String s3) {
-        // Find the length of the longest common prefix
-        int minLen = Math.min(s1.length(), Math.min(s2.length(), s3.length()));
-        int commonLength = 0;
+        int len1 = s1.length();
+        int len2 = s2.length();
+        int len3 = s3.length();
         
-        for (int i = 0; i < minLen; i++) {
-            if (s1.charAt(i) == s2.charAt(i) && s2.charAt(i) == s3.charAt(i)) {
-                commonLength++;
-            } else {
-                break;
-            }
-        }
+        int minLen = len1 < len2 ? (len1 < len3 ? len1 : len3) : (len2 < len3 ? len2 : len3);
         
-        // If no common prefix exists, they cannot be made equal
-        if (commonLength == 0) {
+        if (minLen == 0 || s1.charAt(0) != s2.charAt(0) || s2.charAt(0) != s3.charAt(0)) {
             return -1;
         }
         
-        // Operations = total characters to delete
-        return (s1.length() - commonLength) + 
-               (s2.length() - commonLength) + 
-               (s3.length() - commonLength);
+        int commonLength = 1;
+        while (commonLength < minLen && 
+               s1.charAt(commonLength) == s2.charAt(commonLength) && 
+               s2.charAt(commonLength) == s3.charAt(commonLength)) {
+            commonLength++;
+        }
+        
+        return (len1 - commonLength) + (len2 - commonLength) + (len3 - commonLength);
     }
 }
